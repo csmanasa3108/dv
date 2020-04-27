@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Tree Example</title>
+
+    <style>
+	
+	.node {
+		cursor: pointer;
+	}
+
+	.node circle {
+	  fill: #fff;
+	  stroke: steelblue;
+	  stroke-width: 3px;
+	}
+
+	.node text {
+	  font: 12px sans-serif;
+	}
+
+	.link {
+	  fill: none;
+	  stroke: #ccc;
+	  stroke-width: 2px;
+	}
+	
+    </style>
+
+  </head>
+
+  <body>
+
+<!-- load the d3.js library -->	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+	
+<script>
+
+var treeData = [
+  {
+    "name": "Top Level",
+    "parent": "null",
+    "children": [
+      {
+        "name": "Acanthaceae",
+        "parent": "Acanthaceae",
+        "children": [
+          {
+            "name": "Anisacanthus thurberi",
+            "parent": "Acanthaceae"
+          },
+          {
+            "name": "Carlowrightia arizonica",
+            "parent": "Acanthaceae"
+          },
+          {
+            "name": "Justicia californica",
+            "parent": "Acanthaceae"
+          },
+          {
+            "name": "Justicia candicans",
+            "parent": "Acanthaceae"
+          },
+          {
+            "name": "Justicia longii",
+            "parent": "Acanthaceae"
+          },
+          {
+            "name": "Justicia sonorae",
+            "parent": "Acanthaceae"
+          },
+          {
+            "name": "Ruellia nudiflora",
+            "parent": "Acanthaceae"
+          },
+          {
+            "name": "Ruellia simplex",
+            "parent": "Acanthaceae"
+          }
+        ]
+      },
+      {
+        "name": "Adoxaceae",
+        "parent": "Top Level",
+        "children": [
+          {
+            "name": "Sambucus canadensis",
+            "parent": "Adoxaceae"
+          },
+          {
+            "name": "Sambucus cerulea",
+            "parent": "Adoxaceae"
+          }
+        ]
+      },
+      {
+        "name": "Aizoaceae",
+        "parent": "Top Level",
+        "children": [
+          {
+            "name": "Mesembryanthemum crystallinum",
+            "parent": "Aizoaceae"
+          },
+          {
+            "name": "Mesembryanthemum nodiflorum",
+            "parent": "Aizoaceae"
+          },
+          {
+            "name": "Sesuvium verrucosum",
+            "parent": "Aizoaceae"
+          },
+          {
+            "name": "Trianthema portulacastrum",
+            "parent": "Aizoaceae"
+          }
+        ]
+      },
+      {
+        "name": "Amaranthaceae",
+        "parent": "Top Level",
+        "children": [
+          {
+            "name": "Allenrolfea occidentalis",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Alternanthera caracasana",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Amaranthus albus",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Amaranthus blitoides",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Amaranthus californicus",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Amaranthus crassipes",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Amaranthus cruentus",
+            "parent": "Amaranthaceae"
+          },
+ {
+            "name": "Amaranthus fimbriatus",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Amaranthus graecizans",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Amaranthus hybridus",
+            "parent": "Amaranthaceae"
+          },
+           {
+            "name": "Amaranthus obcordatus",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Amaranthus palmeri",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Amaranthus powellii",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Amaranthus torreyi",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Amaranthus viridis",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Atriplex canescens",
+            "parent": "Amaranthaceae"
+          },
+           {
+            "name": "Atriplex elegans",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Atriplex lentiformis",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Atriplex linearis",
+            "parent": "Amaranthaceae"
+          },
+           {
+            "name": "Atriplex nummularia",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Atriplex polycarpa",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Atriplex rosea",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Atriplex semibaccata",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Atriplex suberecta",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Atriplex wrightii",
+            "parent": "Amaranthaceae"
+          },
+ {
+            "name": "Bassia hyssopifolia",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Bassia scoparia",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Blitum nuttallianum",
+            "parent": "Amaranthaceae"
+          },
+ {
+            "name": "Chenopodiastrum murale",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Chenopodiastrum albescens",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Chenopodiastrum album",
+            "parent": "Amaranthaceae"
+          },
+ {
+            "name": "Chenopodiastrum berlandieri",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Chenopodiastrum desiccatum",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Chenopodiastrum ficifolium",
+            "parent": "Amaranthaceae"
+          },
+ {
+            "name": "Chenopodiastrum fremontii",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Chenopodiastrum leptophyllum",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Chenopodiastrum neomexicanum",
+            "parent": "Amaranthaceae"
+          },
+ {
+            "name": "Chenopodiastrum pratericola",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Chenopodiastrum strictum",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Chenopodiastrum watsonii",
+            "parent": "Amaranthaceae"
+          },
+ {
+            "name": "Cycloloma atriplicifolium",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Dysphania ambrosioides",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Dysphania botrys",
+            "parent": "Amaranthaceae"
+          },
+ {
+            "name": "Dysphania graveolens",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Dysphania pumilio",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Enchylaena tomentosa",
+            "parent": "Amaranthaceae"
+          },
+ {
+            "name": "Gomphrena caespitosa",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Gomphrena sonorae",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Guilleminea densa",
+            "parent": "Amaranthaceae"
+          },
+ {
+            "name": "Krascheninnikovia lanata",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Salsola paulsenii",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Salsola tragus",
+            "parent": "Amaranthaceae"
+          },
+          {
+            "name": "Tidestromia lanuginosa",
+            "parent": "Amaranthaceae"
+          },
+{
+            "name": "Suaeda nigra",
+            "parent": "Amaranthaceae"
+          },
+        ]
+      },
+      {
+        "name": "Amaryllidaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Anacardiaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Apiaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Apocynaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Araceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Araliaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Arecaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Aristolochiaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Asparagaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Asteraceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Berberidaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Betulaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Bignoniaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Bixaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Blechnaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Boraginaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Brassicaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Burseraceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Cactaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Campanulaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Cannabaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Caprifoliaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Caryophyllaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Celastraceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Ceratophyllaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Cleomaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Commelinaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Convolvulaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Crassulaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Crossosomataceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Cucurbitaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Cupressaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Cyperaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Elaeagnaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Equisetaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Ericaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Euphorbiaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Fabaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Fagaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Fouquieriaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Garryaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Gentianaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Geraniaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Grossulariaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Haloragaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Hydrangeaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Hydrocharitaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Juglandaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Juncaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Krameriaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Lamiaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Liliaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Linaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Loasaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Lobeliaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Lomariopsidaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Lythraceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Malpighiaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Malvaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Martyniaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Meliaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Molluginaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Montiaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Moraceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Myrtaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Nemacladaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Nyctaginaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Nymphaeaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Oleaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Onagraceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Orchidaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Orobanchaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Oxalidaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Papaveraceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Passifloraceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Phrymaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Phytolaccaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Picrodendraceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Pinaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Plantaginaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Platanaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Plumbaginaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Poaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Polemoniaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Polygalaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Polygonaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Pontederiaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Portulacaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Potamogetonaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Primulaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Pteridaceae",
+        "parent": "Top Level"
+      },
+      {
+        "name": "Ranunculaceae",
+        "parent": "Top Level",
+        "children": [
+         
+          {
+            "name": "Anemone tuberosa",
+            "parent": "Ranunculaceae"
+          },
+ {
+            "name": "Aquilegia chrysantha",
+            "parent": "Ranunculaceae"
+          },
+          {
+            "name": "Ceratocephala testiculata",
+            "parent": "Ranunculaceae"
+          },
+          {
+            "name": "Clematis drummondii",
+            "parent": "Ranunculaceae"
+          },
+ {
+            "name": "Clematis ligusticifolia",
+            "parent": "Ranunculaceae"
+          },
+          {
+            "name": "Consolida ajacis",
+            "parent": "Ranunculaceae"
+          },
+          {
+            "name": "Delphinium parishii",
+            "parent": "Ranunculaceae"
+          },
+ {
+            "name": "Delphinium scaposum",
+            "parent": "Ranunculaceae"
+          },
+          {
+            "name": "Myosurus cupulatus",
+            "parent": "Ranunculaceae"
+          },
+          {
+            "name": "Myosurus nitidus",
+            "parent": "Ranunculaceae"
+          },
+ {
+            "name": "Ranunculus cymbalaria",
+            "parent": "Ranunculaceae"
+          },
+          {
+            "name": "Ranunculus macounii",
+            "parent": "Ranunculaceae"
+          },
+          {
+            "name": "Ranunculus muricatus",
+            "parent": "Ranunculaceae"
+          },
+ {
+            "name": "Ranunculus sceleratus",
+            "parent": "Ranunculaceae"
+          },
+          {
+            "name": "Thalictrum fendleri",
+            "parent": "Ranunculaceae"
+          }]
+      },
+      {
+        "name": "Resedaceae",
+        "parent": "Top Level",
+        "children": [
+         
+          {
+            "name": "Oligomeris linifolia",
+            "parent": "Resedaceae"
+          }]
+      },
+      {
+        "name": "Rhamnaceae",
+        "parent": "Top Level",
+        "children": [
+         
+          {
+            "name": "Ceanothus fendleri",
+            "parent": "Rhamnaceae"
+          },
+ {
+            "name": "Ceanothus greggii",
+            "parent": "Rhamnaceae"
+          },
+          {
+            "name": "Ceanothus integerrimus",
+            "parent": "Rhamnaceae"
+          },
+          {
+            "name": "Ceanothus pauciflorus",
+            "parent": "Rhamnaceae"
+          },
+ {
+            "name": "Colubrina californica",
+            "parent": "Rhamnaceae"
+          },
+          {
+            "name": "Condalia globosa",
+            "parent": "Rhamnaceae"
+          },
+          {
+            "name": "Condalia spathulata",
+            "parent": "Rhamnaceae"
+          },
+ {
+            "name": "Condalia warnockii",
+            "parent": "Rhamnaceae"
+          },
+          {
+            "name": "Frangula betulifolia",
+            "parent": "Rhamnaceae"
+          },
+          {
+            "name": "Frangula californica",
+            "parent": "Rhamnaceae"
+          },
+ {
+            "name": "Rhamnus crocea",
+            "parent": "Rhamnaceae"
+          },
+          {
+            "name": "Rhamnus ilicifolia",
+            "parent": "Rhamnaceae"
+          },
+          {
+            "name": "Sageretia wrightii",
+            "parent": "Rhamnaceae"
+          },
+ {
+            "name": "Ziziphus jujuba",
+            "parent": "Rhamnaceae"
+          },
+          {
+            "name": "Ziziphus obtusifolia",
+            "parent": "Rhamnaceae"
+          }]
+      },
+      {
+        "name": "Rosaceae",
+        "parent": "Top Level",
+        "children": [
+         
+          {
+            "name": "Amelanchier utahensis",
+            "parent": "Rosaceae"
+          },
+ {
+            "name": "Cercocarpus montanus",
+            "parent": "Rosaceae"
+          },
+          {
+            "name": "Drymocallis arizonica",
+            "parent": "Rosaceae"
+          },
+          {
+            "name": "Fallugia paradoxa",
+            "parent": "Rosaceae"
+          },
+ {
+            "name": "Holodiscus dumosus",
+            "parent": "Rosaceae"
+          },
+          {
+            "name": "Malus sylvestris",
+            "parent": "Rosaceae"
+          },
+          {
+            "name": "Potentilla hippiana",
+            "parent": "Rosaceae"
+          },
+ {
+            "name": "Potentilla rivalis",
+            "parent": "Rosaceae"
+          },
+          {
+            "name": "Potentilla subviscosa",
+            "parent": "Rosaceae"
+          },
+          {
+            "name": "Prunus armeniaca",
+            "parent": "Rosaceae"
+          },
+ {
+            "name": "Prunus emarginata",
+            "parent": "Rosaceae"
+          },
+          {
+            "name": "Prunus fasciculata",
+            "parent": "Rosaceae"
+          },
+          {
+            "name": "Prunus persica",
+            "parent": "Rosaceae"
+          },
+ {
+            "name": "Prunus serotina",
+            "parent": "Rosaceae"
+          },
+          {
+            "name": "Prunus virginiana",
+            "parent": "Rosaceae"
+          },
+          {
+            "name": "Purshia stansburyana",
+            "parent": "Rosaceae"
+          },
+ {
+            "name": "Purshia subintegra",
+            "parent": "Rosaceae"
+          },
+          {
+            "name": "Purshia tridentata",
+            "parent": "Rosaceae"
+          },
+          {
+            "name": "Purshia X subintegra",
+            "parent": "Rosaceae"
+          },
+ {
+            "name": "Pyracantha fortuneana",
+            "parent": "Rosaceae"
+          },
+          {
+            "name": "Pyracantha koidzumii",
+            "parent": "Rosaceae"
+          },
+          {
+            "name": "Rosa woodsii",
+            "parent": "Rosaceae"
+          },
+ {
+            "name": "Rubus arizonensis",
+            "parent": "Rosaceae"
+          },
+          {
+            "name": "Rubus discolor",
+            "parent": "Rosaceae"
+          },
+          {
+            "name": "Rubus neomexicanus",
+            "parent": "Rosaceae"
+          },
+ {
+            "name": "Sanguisorba minor",
+            "parent": "Rosaceae"
+          },
+          {
+            "name": "Vauquelinia californica",
+            "parent": "Rosaceae"
+          }]
+      },
+      {
+        "name": "Rubiaceae",
+        "parent": "Top Level",
+        "children": [
+         
+          {
+            "name": "Cephalanthus occidentalis",
+            "parent": "Rubiaceae"
+          },
+ {
+            "name": "Galium aparine",
+            "parent": "Rubiaceae"
+          },
+          {
+            "name": "Galium microphyllum",
+            "parent": "Rubiaceae"
+          },
+          {
+            "name": "Galium proliferum",
+            "parent": "Rubiaceae"
+          },
+ {
+            "name": "Galium stellatum",
+            "parent": "Rubiaceae"
+          },
+          {
+            "name": "Galium wrightii",
+            "parent": "Rubiaceae"
+          },
+          {
+            "name": "Sherardia arvensis",
+            "parent": "Rubiaceae"
+          }]
+      },
+      {
+        "name": "Ruppiaceae",
+        "parent": "Top Level",
+        "children": [
+         
+          {
+            "name": "Ruppia cirrhosa",
+            "parent": "Ruppiaceae"
+          }]
+      },
+      {
+        "name": "Rutaceae",
+        "parent": "Top Level",
+        "children": [
+         
+          {
+            "name": "Ptelea trifoliata",
+            "parent": "Rutaceae"
+          },
+ {
+            "name": "Thamnosma montana",
+            "parent": "Rutaceae"
+          },
+          {
+            "name": "Thamnosma texanum",
+            "parent": "Rutaceae"
+          }]
+      },
+      {
+        "name": "Salicaceae",
+        "parent": "Top Level",
+        "children": [
+         
+          {
+            "name": "Populus fremontii",
+            "parent": "Salicaceae"
+          },
+ {
+            "name": "Populus tremuloides",
+            "parent": "Salicaceae"
+          },
+          {
+            "name": "Salix babylonica",
+            "parent": "Salicaceae"
+          },
+          {
+            "name": "Salix bonplandiana",
+            "parent": "Salicaceae"
+          },
+ {
+            "name": "Salix exigua",
+            "parent": "Salicaceae"
+          },
+          {
+            "name": "Salix gooddingii",
+            "parent": "Salicaceae"
+          },
+          {
+            "name": "Salix laevigata",
+            "parent": "Salicaceae"
+          },
+ {
+            "name": "Salix lasiandra",
+            "parent": "Salicaceae"
+          },
+          {
+            "name": "Salix lasiolepis",
+            "parent": "Salicaceae"
+          },
+          {
+            "name": "Salix scouleriana",
+            "parent": "Salicaceae"
+          },
+ {
+            "name": "Salix taxifolia",
+            "parent": "Salicaceae"
+          }]
+      },
+      {
+        "name": "Salviniaceae",
+        "parent": "Top Level",
+        "children": [
+         
+          {
+            "name": "Azolla filiculoides",
+            "parent": "Salviniaceae"
+          },
+ {
+            "name": "Azolla microphylla",
+            "parent": "Salviniaceae"
+          }]
+      },
+      {
+        "name": "Santalaceae",
+        "parent": "Top Level",
+        "children": [
+         
+          {
+            "name": "Arceuthobium vaginatum",
+            "parent": "Santalaceae"
+          },
+ {
+            "name": "Comandra umbellata",
+            "parent": "Santalaceae"
+          },
+          {
+            "name": "Phoradendron bolleanum",
+            "parent": "Santalaceae"
+          },
+          {
+            "name": "Phoradendron californicum",
+            "parent": "Santalaceae"
+          },
+ {
+            "name": "Phoradendron capitellatum",
+            "parent": "Santalaceae"
+          },
+          {
+            "name": "Phoradendron juniperinum",
+            "parent": "Santalaceae"
+          },
+          {
+            "name": "Phoradendron serotinum",
+            "parent": "Santalaceae"
+          }
+]
+      },
+      {
+        "name": "Sapindaceae",
+        "parent": "Top Level",
+        "children": [
+         
+          {
+            "name": "Acer negundo",
+            "parent": "Sapindaceae"
+          },
+ {
+            "name": "Dodonaea viscosa",
+            "parent": "Sapindaceae"
+          },
+          {
+            "name": "Sapindus saponaria",
+            "parent": "Sapindaceae"
+          }
+]
+      },
+      {
+        "name": "Sarcobataceae",
+        "parent": "Top Level",
+        "children": [
+         
+          {
+            "name": "Sarcobatus vermiculatus",
+            "parent": "Sarcobataceae"
+          }
+]
+      },
+      {
+        "name": "Saururaceae",
+        "parent": "Top Level",
+        "children": [
+         
+          {
+            "name": "Anemopsis californica",
+            "parent": "Saururaceae"
+          }
+]
+      },
+      {
+        "name": "Saxifragaceae",
+        "parent": "Top Level",
+        "children": [
+         
+          {
+            "name": "Heuchera eastwoodiae",
+            "parent": "Saxifragaceae"
+          },
+ {
+            "name": "Heuchera sanguinea",
+            "parent": "Saxifragaceae"
+          }
+]
+      },
+      {
+        "name": "Scrophulariaceae",
+        "parent": "Top Level",
+        "children": [
+         
+          {
+            "name": "Buddleja marrubiifolia",
+            "parent": "Scrophulariaceae"
+          },
+ {
+            "name": "Buddleja scordioides",
+            "parent": "Scrophulariaceae"
+          },
+          {
+            "name": "Scrophularia parviflora",
+            "parent": "Scrophulariaceae"
+          },
+          {
+            "name": "Verbascum thapsus",
+            "parent": "Scrophulariaceae"
+          },
+ {
+            "name": "Verbascum virgatum",
+            "parent": "Scrophulariaceae"
+          }
+]
+      },
+      {
+        "name": "Selaginellaceae",
+        "parent": "Top Level",
+        "children": [
+         
+          {
+            "name": "Selaginella arizonica",
+            "parent": "Selaginellaceae"
+          },
+ {
+            "name": "Selaginella eremophila",
+            "parent": "Selaginellaceae"
+          },
+          {
+            "name": "Selaginella underwoodii",
+            "parent": "Selaginellaceae"
+          },
+          {
+            "name": "Selaginella x neomexicana",
+            "parent": "Selaginellaceae"
+          }
+]
+      },
+      {
+        "name": "Simaroubaceae",
+        "parent": "Top Level",
+        "children": [
+          {
+            "name": "Ailanthus altissima",
+            "parent": "Simaroubaceae"
+          },
+          {
+            "name": "Castela emoryi",
+            "parent": "Simaroubaceae"
+          }
+]
+      },
+      {
+        "name": "Simmondsiaceae",
+        "parent": "Top Level",
+        "children": [
+          {
+            "name": "Simmondsia chinensis",
+            "parent": "Simmondsiaceae"
+          }
+]
+      },
+      {
+        "name": "Solanaceae",
+        "parent": "Top Level",
+        "children": [
+          {
+            "name": "Calibrachoa parviflora",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Capsicum annuum",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Chamaesaracha coronopus",
+            "parent": "Solanaceae"
+          },
+ {
+            "name": "Datura discolor",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Datura stramonium",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Datura wrightii",
+            "parent": "Solanaceae"
+          },
+ {
+            "name": "Lycium andersonii",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Lycium andersonii x brevipes",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Lycium berlandieri",
+            "parent": "Solanaceae"
+          },
+ {
+            "name": "Lycium californicum",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Lycium cooperi",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Lycium exsertum",
+            "parent": "Solanaceae"
+          },
+ {
+            "name": "Lycium fremontii",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Lycium macrodon",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Lycium parishii",
+            "parent": "Solanaceae"
+          },
+ {
+            "name": "Lycium richii",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Lycium torreyi",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Nicotiana attenuata",
+            "parent": "Solanaceae"
+          },
+ {
+            "name": "Nicotiana clevelandii",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Nicotiana glauca",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Nicotiana obtusifolia",
+            "parent": "Solanaceae"
+          },
+ {
+            "name": "Nicotiana quadrivalvis",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Physalis acutifolia",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Physalis angulata",
+            "parent": "Solanaceae"
+          },
+ {
+            "name": "Physalis crassifolia",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Physalis hederifolia",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Physalis philadelphica",
+            "parent": "Solanaceae"
+          },
+ {
+            "name": "Physalis pubescens",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Physalis solanaceous",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Quincula lobata",
+            "parent": "Solanaceae"
+          },
+ {
+            "name": "Salpichroa origanifolia",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Solanum americanum",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Solanum carolinense",
+            "parent": "Solanaceae"
+          },
+ {
+            "name": "Solanum douglasii",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Solanum elaeagnifolium",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Solanum heterodoxum",
+            "parent": "Solanaceae"
+          },
+ {
+            "name": "Solanum lycopersicum",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Solanum physalifolium",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Solanum rostratum",
+            "parent": "Solanaceae"
+          },
+ {
+            "name": "Solanum triflorum",
+            "parent": "Solanaceae"
+          },
+          {
+            "name": "Solanum xanti",
+            "parent": "Solanaceae"
+          }
+]
+      },
+      {
+        "name": "Tamaricaceae",
+        "parent": "Top Level",
+        "children": [
+          {
+            "name": "Tamarix africana",
+            "parent": "Tamaricaceae"
+          },
+          {
+            "name": "Tamarix aphylla",
+            "parent": "Tamaricaceae"
+          },
+          {
+            "name": "Tamarix canariensis",
+            "parent": "Tamaricaceae"
+          },
+ {
+            "name": "Tamarix chinensis",
+            "parent": "Tamaricaceae"
+          },
+          {
+            "name": "Tamarix gallica",
+            "parent": "Tamaricaceae"
+          },
+          {
+            "name": "Tamarix parviflora",
+            "parent": "Tamaricaceae"
+          }
+]
+      },
+      {
+        "name": "Typhaceae",
+        "parent": "Top Level",
+        "children": [
+          {
+            "name": "Typha domingensis",
+            "parent": "Typhaceae"
+          },
+          {
+            "name": "Typha latifolia",
+            "parent": "Typhaceae"
+          }
+]
+      },
+      {
+        "name": "Ulmaceae",
+        "parent": "Top Level",
+
+"children": [
+          {
+            "name": "Ulmus parvifolia",
+            "parent": "Ulmaceae"
+          },
+          {
+            "name": "Ulmus pumila",
+            "parent": "Ulmaceae"
+          }
+]
+      },
+      {
+        "name": "Urticaceae",
+        "parent": "Top Level",
+        "children": [
+          {
+            "name": "Parietaria pensylvanica",
+            "parent": "Urticaceae"
+          },
+          {
+            "name": "Urtica urens",
+            "parent": "Urticaceae"
+          }
+]
+      },
+      {
+        "name": "Verbenaceae",
+        "parent": "Top Level",
+        "children": [
+          {
+            "name": "Aloysia wrightii",
+            "parent": "Verbenaceae"
+          },
+          {
+            "name": "Glandularia bipinnatifida",
+            "parent": "Verbenaceae"
+          },
+          {
+            "name": "Glandularia gooddingii",
+            "parent": "Verbenaceae"
+          },
+ {
+            "name": "Glandularia pulchella",
+            "parent": "Verbenaceae"
+          },
+          {
+            "name": "Glandularia wrightii",
+            "parent": "Verbenaceae"
+          },
+          {
+            "name": "Lantana camara",
+            "parent": "Verbenaceae"
+          },
+ {
+            "name": "Phyla nodiflora",
+            "parent": "Verbenaceae"
+          },
+          {
+            "name": "Verbena bonariensis",
+            "parent": "Verbenaceae"
+          },
+ {
+            "name": "Verbena carolina",
+            "parent": "Verbenaceae"
+          },
+{
+            "name": "Verbena bracteata",
+            "parent": "Verbenaceae"
+          },
+          {
+            "name": "Verbena menthifolia",
+            "parent": "Verbenaceae"
+          },
+          {
+            "name": "Verbena neomexicana",
+            "parent": "Verbenaceae"
+          },
+ {
+            "name": "Verbena plicata",
+            "parent": "Verbenaceae"
+          },
+          {
+            "name": "Verbena rigida",
+            "parent": "Verbenaceae"
+          },
+          {
+            "name": "Verbena scabra",
+            "parent": "Verbenaceae"
+          }
+]
+      },
+      {
+        "name": "Violaceae",
+        "parent": "Top Level",
+        "children": [
+          {
+            "name": "Hybanthus verticillatus",
+            "parent": "Violaceae"
+          },
+          {
+            "name": "Viola arvensis",
+            "parent": "Violaceae"
+          },
+          {
+            "name": "Viola canadensis",
+            "parent": "Violaceae"
+          }
+]
+      },
+      {
+        "name": "Vitaceae",
+        "parent": "Top Level",
+        "children": [
+          {
+            "name": "Vitis arizonica",
+            "parent": "Vitaceae"
+          },
+          {
+            "name": "Parthenocissus quinquefolia",
+            "parent": "Vitaceae"
+          },
+          {
+            "name": "Parthenocissus inserta",
+            "parent": "Vitaceae"
+          },
+ {
+            "name": "Cissus trifoliata",
+            "parent": "Vitaceae"
+          }
+]
+      },
+      {
+        "name": "Woodsiaceae",
+        "parent": "Top Level",
+
+"children": [
+          {
+            "name": "Woodsia plummerae",
+            "parent": "Woodsiaceae"
+          }
+]
+      },
+      {
+        "name": "Xanthorrhoeaceae",
+        "parent": "Top Level",
+        "children": [
+          {
+            "name": "Asphodelus fistulosus",
+            "parent": "Xanthorrhoeaceae"
+          },
+          {
+            "name": "Aloe vera",
+            "parent": "Xanthorrhoeaceae"
+          },
+          {
+            "name": "Aloe maculata",
+            "parent": "Xanthorrhoeaceae"
+          }
+]
+      },
+      {
+        "name": "Zygophyllaceae",
+        "parent": "Top Level",
+        "children": [
+          {
+            "name": "Fagonia laevis",
+            "parent": "Zygophyllaceae"
+          },
+          {
+            "name": "Fagonia pachyacantha",
+            "parent": "Zygophyllaceae"
+          },
+          {
+            "name": "Kallstroemia californica",
+            "parent": "Zygophyllaceae"
+          },
+          {
+            "name": "Kallstroemia grandiflora",
+            "parent": "Zygophyllaceae"
+          },
+ {
+            "name": "Kallstroemia hirsutissima",
+            "parent": "Zygophyllaceae"
+          },
+          {
+            "name": "Kallstroemia parviflora",
+            "parent": "Zygophyllaceae"
+          },
+          {
+            "name": "Larrea tridentata",
+            "parent": "Zygophyllaceae"
+          },
+ {
+            "name": "Tribulus terrestris",
+            "parent": "Zygophyllaceae"
+          }
+]
+      }
+    ]
+  }
+];
+
+
+// ************** Generate the tree diagram	 *****************
+var margin = {top: 5, right: 5, bottom: 5, left: 15},
+	width = 5000 - margin.right - margin.left,
+	height = 5000 - margin.top - margin.bottom;
+	
+var i = 0,
+	duration = 750,
+	root;
+
+var tree = d3.layout.tree()
+	.size([height, width]);
+
+var diagonal = d3.svg.diagonal()
+	.projection(function(d) { return [d.y, d.x]; });
+
+var svg = d3.select("body").append("svg")
+	.attr("width", width + margin.right + margin.left)
+	.attr("height", height + margin.top + margin.bottom)
+  .append("g")
+	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+root = treeData[0];
+root.x0 = height / 2;
+root.y0 = 0;
+  
+update(root);
+
+d3.select(self.frameElement).style("height", "500px");
+
+function update(source) {
+
+  // Compute the new tree layout.
+  var nodes = tree.nodes(root).reverse(),
+	  links = tree.links(nodes);
+
+  // Normalize for fixed-depth.
+  nodes.forEach(function(d) { d.y = d.depth * 180; });
+
+  // Update the nodes…
+  var node = svg.selectAll("g.node")
+	  .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+  // Enter any new nodes at the parent's previous position.
+  var nodeEnter = node.enter().append("g")
+	  .attr("class", "node")
+	  .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+	  .on("click", click);
+
+  nodeEnter.append("circle")
+	  .attr("r", 1e-6)
+	  .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+  nodeEnter.append("text")
+	  .attr("x", function(d) { return d.children || d._children ? -13 : 13; })
+	  .attr("dy", ".35em")
+	  .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+	  .text(function(d) { return d.name; })
+	  .style("fill-opacity", 1e-6);
+
+  // Transition nodes to their new position.
+  var nodeUpdate = node.transition()
+	  .duration(duration)
+	  .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+  nodeUpdate.select("circle")
+	  .attr("r", 10)
+	  .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+  nodeUpdate.select("text")
+	  .style("fill-opacity", 1);
+
+  // Transition exiting nodes to the parent's new position.
+  var nodeExit = node.exit().transition()
+	  .duration(duration)
+	  .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+	  .remove();
+
+  nodeExit.select("circle")
+	  .attr("r", 1e-6);
+
+  nodeExit.select("text")
+	  .style("fill-opacity", 1e-6);
+
+  // Update the links…
+  var link = svg.selectAll("path.link")
+	  .data(links, function(d) { return d.target.id; });
+
+  // Enter any new links at the parent's previous position.
+  link.enter().insert("path", "g")
+	  .attr("class", "link")
+	  .attr("d", function(d) {
+		var o = {x: source.x0, y: source.y0};
+		return diagonal({source: o, target: o});
+	  });
+
+  // Transition links to their new position.
+  link.transition()
+	  .duration(duration)
+	  .attr("d", diagonal);
+
+  // Transition exiting nodes to the parent's new position.
+  link.exit().transition()
+	  .duration(duration)
+	  .attr("d", function(d) {
+		var o = {x: source.x, y: source.y};
+		return diagonal({source: o, target: o});
+	  })
+	  .remove();
+
+  // Stash the old positions for transition.
+  nodes.forEach(function(d) {
+	d.x0 = d.x;
+	d.y0 = d.y;
+  });
+}
+
+// Toggle children on click.
+function click(d) {
+  if (d.children) {
+	d._children = d.children;
+	d.children = null;
+  } else {
+	d.children = d._children;
+	d._children = null;
+  }
+  update(d);
+}
+
+</script>
+	
+  </body>
+</html>
